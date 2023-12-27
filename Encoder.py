@@ -36,6 +36,8 @@ class VAE_Encoder(nn.Sequential):
         )
 
     def forward(self, x, noise):
+        # noise: (Batch_Size, 4, Height / 8, Width / 8)
+
         for module in self:
             # Padding at downsampling should be asymmetric
             if getattr(module, 'stride', None) == (2, 2):
@@ -43,6 +45,7 @@ class VAE_Encoder(nn.Sequential):
 
             x = module(x)
 
+        # (Batch, 8, Height / 8, Width / 8) -> two tensors of shape (Batch, 4, Height / 8, Width / 8)
         mean, log_variance = torch.chunk(x, 2, dim=1)
         log_variance = torch.clamp(log_variance, -30, 20)
         variance = log_variance.exp()
