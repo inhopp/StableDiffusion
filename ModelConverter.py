@@ -1,6 +1,7 @@
 import torch
+from typing import Dict
 
-def load_from_standard_weights(input_file: str, device: str) -> dict[str, torch.Tensor]:
+def load_from_standard_weights(input_file: str, device: str) -> Dict[str, torch.Tensor]:
     # Taken from: https://github.com/kjsman/stable-diffusion-pytorch/issues/7#issuecomment-1426839447
     original_model = torch.load(input_file, map_location=device, weights_only = False)["state_dict"]
 
@@ -724,50 +725,50 @@ def load_from_standard_weights(input_file: str, device: str) -> dict[str, torch.
     converted['encoder']['11.groupnorm2.bias'] = original_model['first_stage_model.encoder.down.3.block.1.norm2.bias']
     converted['encoder']['11.conv2.weight'] = original_model['first_stage_model.encoder.down.3.block.1.conv2.weight']
     converted['encoder']['11.conv2.bias'] = original_model['first_stage_model.encoder.down.3.block.1.conv2.bias']
-    converted['encoder']['12.groupnorm1.weight'] = original_model['first_stage_model.encoder.mid.block1.norm1.weight']
-    converted['encoder']['12.groupnorm1.bias'] = original_model['first_stage_model.encoder.mid.block1.norm1.bias']
-    converted['encoder']['12.conv1.weight'] = original_model['first_stage_model.encoder.mid.block1.conv1.weight']
-    converted['encoder']['12.conv1.bias'] = original_model['first_stage_model.encoder.mid.block1.conv1.bias']
-    converted['encoder']['12.groupnorm2.weight'] = original_model['first_stage_model.encoder.mid.block1.norm2.weight']
-    converted['encoder']['12.groupnorm2.bias'] = original_model['first_stage_model.encoder.mid.block1.norm2.bias']
-    converted['encoder']['12.conv2.weight'] = original_model['first_stage_model.encoder.mid.block1.conv2.weight']
-    converted['encoder']['12.conv2.bias'] = original_model['first_stage_model.encoder.mid.block1.conv2.bias']
-    converted['encoder']['13.groupnorm.weight'] = original_model['first_stage_model.encoder.mid.attn1.norm.weight']
-    converted['encoder']['13.groupnorm.bias'] = original_model['first_stage_model.encoder.mid.attn1.norm.bias']
-    converted['encoder']['13.attention.out_proj.bias'] = original_model['first_stage_model.encoder.mid.attn1.proj_out.bias']
-    converted['encoder']['14.groupnorm1.weight'] = original_model['first_stage_model.encoder.mid.block2.norm1.weight']
-    converted['encoder']['14.groupnorm1.bias'] = original_model['first_stage_model.encoder.mid.block2.norm1.bias']
-    converted['encoder']['14.conv1.weight'] = original_model['first_stage_model.encoder.mid.block2.conv1.weight']
-    converted['encoder']['14.conv1.bias'] = original_model['first_stage_model.encoder.mid.block2.conv1.bias']
-    converted['encoder']['14.groupnorm2.weight'] = original_model['first_stage_model.encoder.mid.block2.norm2.weight']
-    converted['encoder']['14.groupnorm2.bias'] = original_model['first_stage_model.encoder.mid.block2.norm2.bias']
-    converted['encoder']['14.conv2.weight'] = original_model['first_stage_model.encoder.mid.block2.conv2.weight']
-    converted['encoder']['14.conv2.bias'] = original_model['first_stage_model.encoder.mid.block2.conv2.bias']
+    converted['encoder']['12.groupnorm1.weight'] = original_model['first_stage_model.encoder.mid.block_1.norm1.weight']
+    converted['encoder']['12.groupnorm1.bias'] = original_model['first_stage_model.encoder.mid.block_1.norm1.bias']
+    converted['encoder']['12.conv1.weight'] = original_model['first_stage_model.encoder.mid.block_1.conv1.weight']
+    converted['encoder']['12.conv1.bias'] = original_model['first_stage_model.encoder.mid.block_1.conv1.bias']
+    converted['encoder']['12.groupnorm2.weight'] = original_model['first_stage_model.encoder.mid.block_1.norm2.weight']
+    converted['encoder']['12.groupnorm2.bias'] = original_model['first_stage_model.encoder.mid.block_1.norm2.bias']
+    converted['encoder']['12.conv2.weight'] = original_model['first_stage_model.encoder.mid.block_1.conv2.weight']
+    converted['encoder']['12.conv2.bias'] = original_model['first_stage_model.encoder.mid.block_1.conv2.bias']
+    converted['encoder']['13.groupnorm.weight'] = original_model['first_stage_model.encoder.mid.attn_1.norm.weight']
+    converted['encoder']['13.groupnorm.bias'] = original_model['first_stage_model.encoder.mid.attn_1.norm.bias']
+    converted['encoder']['13.attention.out_proj.bias'] = original_model['first_stage_model.encoder.mid.attn_1.proj_out.bias'] 
+    converted['encoder']['14.groupnorm1.weight'] = original_model['first_stage_model.encoder.mid.block_2.norm1.weight']
+    converted['encoder']['14.groupnorm1.bias'] = original_model['first_stage_model.encoder.mid.block_2.norm1.bias']
+    converted['encoder']['14.conv1.weight'] = original_model['first_stage_model.encoder.mid.block_2.conv1.weight']
+    converted['encoder']['14.conv1.bias'] = original_model['first_stage_model.encoder.mid.block_2.conv1.bias']
+    converted['encoder']['14.groupnorm2.weight'] = original_model['first_stage_model.encoder.mid.block_2.norm2.weight']
+    converted['encoder']['14.groupnorm2.bias'] = original_model['first_stage_model.encoder.mid.block_2.norm2.bias']
+    converted['encoder']['14.conv2.weight'] = original_model['first_stage_model.encoder.mid.block_2.conv2.weight']
+    converted['encoder']['14.conv2.bias'] = original_model['first_stage_model.encoder.mid.block_2.conv2.bias']
     converted['encoder']['15.weight'] = original_model['first_stage_model.encoder.norm_out.weight']
     converted['encoder']['15.bias'] = original_model['first_stage_model.encoder.norm_out.bias']
     converted['encoder']['17.weight'] = original_model['first_stage_model.encoder.conv_out.weight']
     converted['encoder']['17.bias'] = original_model['first_stage_model.encoder.conv_out.bias']
     converted['decoder']['1.weight'] = original_model['first_stage_model.decoder.conv_in.weight']
     converted['decoder']['1.bias'] = original_model['first_stage_model.decoder.conv_in.bias']
-    converted['decoder']['2.groupnorm1.weight'] = original_model['first_stage_model.decoder.mid.block1.norm1.weight']
-    converted['decoder']['2.groupnorm1.bias'] = original_model['first_stage_model.decoder.mid.block1.norm1.bias']
-    converted['decoder']['2.conv1.weight'] = original_model['first_stage_model.decoder.mid.block1.conv1.weight']
-    converted['decoder']['2.conv1.bias'] = original_model['first_stage_model.decoder.mid.block1.conv1.bias']
-    converted['decoder']['2.groupnorm2.weight'] = original_model['first_stage_model.decoder.mid.block1.norm2.weight']
-    converted['decoder']['2.groupnorm2.bias'] = original_model['first_stage_model.decoder.mid.block1.norm2.bias']
-    converted['decoder']['2.conv2.weight'] = original_model['first_stage_model.decoder.mid.block1.conv2.weight']
-    converted['decoder']['2.conv2.bias'] = original_model['first_stage_model.decoder.mid.block1.conv2.bias']
-    converted['decoder']['3.groupnorm.weight'] = original_model['first_stage_model.decoder.mid.attn1.norm.weight']
-    converted['decoder']['3.groupnorm.bias'] = original_model['first_stage_model.decoder.mid.attn1.norm.bias']
-    converted['decoder']['3.attention.out_proj.bias'] = original_model['first_stage_model.decoder.mid.attn1.proj_out.bias']
-    converted['decoder']['4.groupnorm1.weight'] = original_model['first_stage_model.decoder.mid.block2.norm1.weight']
-    converted['decoder']['4.groupnorm1.bias'] = original_model['first_stage_model.decoder.mid.block2.norm1.bias']
-    converted['decoder']['4.conv1.weight'] = original_model['first_stage_model.decoder.mid.block2.conv1.weight']
-    converted['decoder']['4.conv1.bias'] = original_model['first_stage_model.decoder.mid.block2.conv1.bias']
-    converted['decoder']['4.groupnorm2.weight'] = original_model['first_stage_model.decoder.mid.block2.norm2.weight']
-    converted['decoder']['4.groupnorm2.bias'] = original_model['first_stage_model.decoder.mid.block2.norm2.bias']
-    converted['decoder']['4.conv2.weight'] = original_model['first_stage_model.decoder.mid.block2.conv2.weight']
-    converted['decoder']['4.conv2.bias'] = original_model['first_stage_model.decoder.mid.block2.conv2.bias']
+    converted['decoder']['2.groupnorm1.weight'] = original_model['first_stage_model.decoder.mid.block_1.norm1.weight']
+    converted['decoder']['2.groupnorm1.bias'] = original_model['first_stage_model.decoder.mid.block_1.norm1.bias']
+    converted['decoder']['2.conv1.weight'] = original_model['first_stage_model.decoder.mid.block_1.conv1.weight']
+    converted['decoder']['2.conv1.bias'] = original_model['first_stage_model.decoder.mid.block_1.conv1.bias']
+    converted['decoder']['2.groupnorm2.weight'] = original_model['first_stage_model.decoder.mid.block_1.norm2.weight']
+    converted['decoder']['2.groupnorm2.bias'] = original_model['first_stage_model.decoder.mid.block_1.norm2.bias']
+    converted['decoder']['2.conv2.weight'] = original_model['first_stage_model.decoder.mid.block_1.conv2.weight']
+    converted['decoder']['2.conv2.bias'] = original_model['first_stage_model.decoder.mid.block_1.conv2.bias']
+    converted['decoder']['3.groupnorm.weight'] = original_model['first_stage_model.decoder.mid.attn_1.norm.weight']
+    converted['decoder']['3.groupnorm.bias'] = original_model['first_stage_model.decoder.mid.attn_1.norm.bias']
+    converted['decoder']['3.attention.out_proj.bias'] = original_model['first_stage_model.decoder.mid.attn_1.proj_out.bias']
+    converted['decoder']['4.groupnorm1.weight'] = original_model['first_stage_model.decoder.mid.block_2.norm1.weight']
+    converted['decoder']['4.groupnorm1.bias'] = original_model['first_stage_model.decoder.mid.block_2.norm1.bias']
+    converted['decoder']['4.conv1.weight'] = original_model['first_stage_model.decoder.mid.block_2.conv1.weight']
+    converted['decoder']['4.conv1.bias'] = original_model['first_stage_model.decoder.mid.block_2.conv1.bias']
+    converted['decoder']['4.groupnorm2.weight'] = original_model['first_stage_model.decoder.mid.block_2.norm2.weight']
+    converted['decoder']['4.groupnorm2.bias'] = original_model['first_stage_model.decoder.mid.block_2.norm2.bias']
+    converted['decoder']['4.conv2.weight'] = original_model['first_stage_model.decoder.mid.block_2.conv2.weight']
+    converted['decoder']['4.conv2.bias'] = original_model['first_stage_model.decoder.mid.block_2.conv2.bias']
     converted['decoder']['20.groupnorm1.weight'] = original_model['first_stage_model.decoder.up.0.block.0.norm1.weight']
     converted['decoder']['20.groupnorm1.bias'] = original_model['first_stage_model.decoder.up.0.block.0.norm1.bias']
     converted['decoder']['20.conv1.weight'] = original_model['first_stage_model.decoder.up.0.block.0.conv1.weight']
@@ -1022,12 +1023,12 @@ def load_from_standard_weights(input_file: str, device: str) -> dict[str, torch.
     converted['diffusion']['unet.decoders.9.1.attention1.in_proj.weight'] = torch.cat((original_model['model.diffusion_model.output_blocks.9.1.transformer_blocks.0.attn1.to_q.weight'], original_model['model.diffusion_model.output_blocks.9.1.transformer_blocks.0.attn1.to_k.weight'], original_model['model.diffusion_model.output_blocks.9.1.transformer_blocks.0.attn1.to_v.weight']), 0)
     converted['diffusion']['unet.decoders.10.1.attention1.in_proj.weight'] = torch.cat((original_model['model.diffusion_model.output_blocks.10.1.transformer_blocks.0.attn1.to_q.weight'], original_model['model.diffusion_model.output_blocks.10.1.transformer_blocks.0.attn1.to_k.weight'], original_model['model.diffusion_model.output_blocks.10.1.transformer_blocks.0.attn1.to_v.weight']), 0)
     converted['diffusion']['unet.decoders.11.1.attention1.in_proj.weight'] = torch.cat((original_model['model.diffusion_model.output_blocks.11.1.transformer_blocks.0.attn1.to_q.weight'], original_model['model.diffusion_model.output_blocks.11.1.transformer_blocks.0.attn1.to_k.weight'], original_model['model.diffusion_model.output_blocks.11.1.transformer_blocks.0.attn1.to_v.weight']), 0)
-    converted['encoder']['13.attention.in_proj.weight'] = torch.cat((original_model['first_stage_model.encoder.mid.attn1.q.weight'], original_model['first_stage_model.encoder.mid.attn1.k.weight'], original_model['first_stage_model.encoder.mid.attn1.v.weight']), 0).reshape((1536, 512))
-    converted['encoder']['13.attention.in_proj.bias'] = torch.cat((original_model['first_stage_model.encoder.mid.attn1.q.bias'], original_model['first_stage_model.encoder.mid.attn1.k.bias'], original_model['first_stage_model.encoder.mid.attn1.v.bias']), 0)
-    converted['encoder']['13.attention.out_proj.weight'] = original_model['first_stage_model.encoder.mid.attn1.proj_out.weight'].reshape((512, 512))
-    converted['decoder']['3.attention.in_proj.weight'] = torch.cat((original_model['first_stage_model.decoder.mid.attn1.q.weight'], original_model['first_stage_model.decoder.mid.attn1.k.weight'], original_model['first_stage_model.decoder.mid.attn1.v.weight']), 0).reshape((1536, 512))
-    converted['decoder']['3.attention.in_proj.bias'] = torch.cat((original_model['first_stage_model.decoder.mid.attn1.q.bias'], original_model['first_stage_model.decoder.mid.attn1.k.bias'], original_model['first_stage_model.decoder.mid.attn1.v.bias']), 0)
-    converted['decoder']['3.attention.out_proj.weight'] = original_model['first_stage_model.decoder.mid.attn1.proj_out.weight'].reshape((512, 512))
+    converted['encoder']['13.attention.in_proj.weight'] = torch.cat((original_model['first_stage_model.encoder.mid.attn_1.q.weight'], original_model['first_stage_model.encoder.mid.attn_1.k.weight'], original_model['first_stage_model.encoder.mid.attn_1.v.weight']), 0).reshape((1536, 512))
+    converted['encoder']['13.attention.in_proj.bias'] = torch.cat((original_model['first_stage_model.encoder.mid.attn_1.q.bias'], original_model['first_stage_model.encoder.mid.attn_1.k.bias'], original_model['first_stage_model.encoder.mid.attn_1.v.bias']), 0)
+    converted['encoder']['13.attention.out_proj.weight'] = original_model['first_stage_model.encoder.mid.attn_1.proj_out.weight'].reshape((512, 512))
+    converted['decoder']['3.attention.in_proj.weight'] = torch.cat((original_model['first_stage_model.decoder.mid.attn_1.q.weight'], original_model['first_stage_model.decoder.mid.attn_1.k.weight'], original_model['first_stage_model.decoder.mid.attn_1.v.weight']), 0).reshape((1536, 512))
+    converted['decoder']['3.attention.in_proj.bias'] = torch.cat((original_model['first_stage_model.decoder.mid.attn_1.q.bias'], original_model['first_stage_model.decoder.mid.attn_1.k.bias'], original_model['first_stage_model.decoder.mid.attn_1.v.bias']), 0)
+    converted['decoder']['3.attention.out_proj.weight'] = original_model['first_stage_model.decoder.mid.attn_1.proj_out.weight'].reshape((512, 512))
     converted['clip']['layers.0.attention.in_proj.weight'] = torch.cat((original_model['cond_stage_model.transformer.text_model.encoder.layers.0.self_attn.q_proj.weight'], original_model['cond_stage_model.transformer.text_model.encoder.layers.0.self_attn.k_proj.weight'], original_model['cond_stage_model.transformer.text_model.encoder.layers.0.self_attn.v_proj.weight']), 0)
     converted['clip']['layers.0.attention.in_proj.bias'] = torch.cat((original_model['cond_stage_model.transformer.text_model.encoder.layers.0.self_attn.q_proj.bias'], original_model['cond_stage_model.transformer.text_model.encoder.layers.0.self_attn.k_proj.bias'], original_model['cond_stage_model.transformer.text_model.encoder.layers.0.self_attn.v_proj.bias']), 0)
     converted['clip']['layers.1.attention.in_proj.weight'] = torch.cat((original_model['cond_stage_model.transformer.text_model.encoder.layers.1.self_attn.q_proj.weight'], original_model['cond_stage_model.transformer.text_model.encoder.layers.1.self_attn.k_proj.weight'], original_model['cond_stage_model.transformer.text_model.encoder.layers.1.self_attn.v_proj.weight']), 0)

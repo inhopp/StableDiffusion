@@ -23,7 +23,7 @@ class SelfAttention(nn.Module):
         k = k.view(inter_shape).transpose(1, 2)
         v = v.view(inter_shape).transpose(1, 2)
 
-        weight = q @ k.transpose(-1. -2)
+        weight = q @ k.transpose(-1, -2)
 
         # Mask where the upper triangle with -inf
         if casual_mask:
@@ -66,7 +66,7 @@ class CrossAttention(nn.Module):
         k = k.view(inter_shape).transpose(1, 2)
         v = v.view(inter_shape).transpose(1, 2)
 
-        weight = q @ k.transpose(-1. -2)
+        weight = q @ k.transpose(-1, -2)
         
         weight /= math.sqrt(self.d_head)
         weight = F.softmax(weight, dim=-1)
