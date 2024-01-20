@@ -46,8 +46,8 @@ StableDiffusion from scratch (pytorch lightning)
 
 ``` python
 # Clone this repo and install dependency
-git clone https://github.com/inhopp/DDPM.git
-pip install -r "DDPM/requirments.txt"
+git clone https://github.com/inhopp/StableDiffusion.git
+pip install -r "StableDiffusion/requirments.txt"
 ```
 
 <br>
